@@ -1,7 +1,9 @@
 import { useState } from "react"
+import { useStorage } from "@plasmohq/storage/hook"
 
 function IndexPopup() {
   const [data, setData] = useState("")
+  const [hailingFrequency] = useStorage("hailing")
 
   return (
     <div
@@ -9,7 +11,7 @@ function IndexPopup() {
         padding: 16
       }}>
       <h2>
-        Welcome to your{" "}
+        Welcome {hailingFrequency} your{" "}
         <a href="https://www.plasmo.com" target="_blank">
           Plasmo
         </a>{" "}
