@@ -1,6 +1,6 @@
 import { useStorage } from "@plasmohq/storage/hook"
 
-import type { AcceptedCurrency, CurrencyRates } from "~lib/currencies"
+import type { AcceptedCurrency, CurrencyRates } from "~src/lib/currencies"
 
 async function fetchCurrencyExchangeRates(
   fromCurrency: AcceptedCurrency

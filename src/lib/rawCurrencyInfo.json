@@ -1,6 +1,6 @@
 [
   {
-    "currency": "Abkhazian apsar[E]",
+    "currency": "Abkhazian apsar",
     "symbol": "аҧ",
     "code": "(none)",
     "basic": "(none)"
@@ -129,7 +129,7 @@
     "basic": "100"
   },
   {
-    "currency": "United States dollar[F]",
+    "currency": "United States dollar",
     "symbol": "$",
     "code": "USD",
     "basic": "100"
@@ -336,12 +336,6 @@
     "basic": "100"
   },
   {
-    "currency": "Bitcoin[4]",
-    "symbol": "₿",
-    "code": "(none)",
-    "basic": "100000000"
-  },
-  {
     "currency": "Central African CFA franc",
     "symbol": "Fr",
     "code": "XAF",
@@ -539,7 +533,7 @@
     "basic": "100"
   },
   {
-    "currency": "Kiribati dollar[E]",
+    "currency": "Kiribati dollar",
     "symbol": "$",
     "code": "(none)",
     "basic": "100"
@@ -782,7 +776,7 @@
     "basic": "100"
   },
   {
-    "currency": "Niue dollar[E]",
+    "currency": "Niue dollar",
     "symbol": "$",
     "code": "(none)",
     "basic": "100"
@@ -863,7 +857,7 @@
     "basic": "100"
   },
   {
-    "currency": "Pitcairn Islands dollar[E]",
+    "currency": "Pitcairn Islands dollar",
     "symbol": "$",
     "code": "(none)",
     "basic": "100"
@@ -885,7 +879,7 @@
     "basic": "100"
   },
   {
-    "currency": "United States dollar[F]",
+    "currency": "United States dollar",
     "symbol": "$",
     "code": "USD",
     "basic": "100"
@@ -981,7 +975,7 @@
   },
   { "currency": "Brunei dollar", "symbol": "$", "code": "BND", "basic": "100" },
   {
-    "currency": "United States dollar[F]",
+    "currency": "United States dollar",
     "symbol": "$",
     "code": "USD",
     "basic": "100"
@@ -1078,7 +1072,7 @@
     "basic": "100"
   },
   {
-    "currency": "Tongan paʻanga[K]",
+    "currency": "Tongan paʻanga",
     "symbol": "T$",
     "code": "TOP",
     "basic": "100"
@@ -1172,9 +1166,9 @@
     "basic": "1"
   },
   {
-    "currency": "Venezuelan digital bolívar",
-    "symbol": "Bs.D",
-    "code": "VED",
+    "currency": "Venezuelan bolívar (obsolete)",
+    "symbol": "Bs.F",
+    "code": "VEF",
     "basic": "100"
   },
   {

@@ -1,13 +1,13 @@
 @font-face {
     font-family: "Lora";
     font-display: swap;
-    src: url(data-base64:~assets/fonts/Lora/Lora-VariableFont_wght.ttf) format("ttf");
+    src: url(data-base64:/assets/fonts/Lora/Lora-VariableFont_wght.ttf) format("ttf");
     font-weight: 100 1000;
   }
 
   @font-face {
     font-family: "Inter";
     font-display: swap;
-    src: url(data-base64:~assets/fonts/Inter/Inter-VariableFont.ttf) format("ttf");
+    src: url(data-base64:/assets/fonts/Inter/Inter-VariableFont.ttf) format("ttf");
     font-weight: 100 1000;
   }

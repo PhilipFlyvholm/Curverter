@@ -1,0 +1,257 @@
+.highlightBox {
+  display: flex;
+  background-color: #eeeee1;
+  color: #232323;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  gap: 0.2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: none;
+  width: max-content;
+  border-radius: 1rem;
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.25);
+  font-family: "Inter", sans-serif;
+}
+
+.highlightBoxInner {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0 0.2rem;
+  gap: 0.2rem;
+}
+
+.highlightBoxInner img {
+  border-radius: 100px;
+  width: 30px;
+  height: 30px;
+  box-shadow: 0 2px 4px 1px rgba(0, 0, 0, 0.25);
+}
+
+.highlightBox h2,
+.highlightBox p {
+  margin: 0;
+  font-weight: normal;
+}
+
+.highlightBoxInner h2 {
+  padding: 0 0.5rem;
+  font-size: 1.2rem;
+  font-family: "Lora", serif;
+}
+
+.highlightBox p {
+  padding: 0 0.5rem;
+  font-size: 0.8rem;
+}
+
+.currencySelector {
+  position: relative;
+}
+
+.expandButton {
+  box-sizing: content-box;
+  background: #232323;
+  color: white;
+  width: 15px;
+  height: 15px;
+  margin: 0;
+  padding: 0;
+  display: block;
+  border-radius: 30px;
+  border: none;
+  padding: 0.2rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  translate: 50% 25%;
+}
+
+.expandButton:hover {
+  background: #333;
+  cursor: pointer;
+}
+
+.expandButton svg {
+  width: 100%;
+  height: 100%;
+}
+.currencyCombobox * {
+  box-sizing: border-box;
+}
+
+.currencyCombobox {
+  --font-sans: "Inter", --apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  --cmdk-shadow: 0 16px 70px rgb(0 0 0 / 20%);
+
+  --gray4: hsl(0, 0%, 93%);
+  --gray5: hsl(0, 0%, 90.9%);
+  --gray6: hsl(0, 0%, 88.7%);
+  --gray8: hsl(0, 0%, 78%);
+  --gray9: hsl(0, 0%, 56.1%);
+  --gray10: hsl(0, 0%, 52.3%);
+  --gray11: hsl(0, 0%, 43.5%);
+  --gray12: hsl(0, 0%, 9%);
+  --grayA3: hsla(0, 0%, 0%, 0.047);
+
+  transition: width 1s ease;
+  max-width: 500px;
+  width: max-content;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, 10px);
+}
+
+.currencyCombobox .currencyItem{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+}
+
+.currencyCombobox [cmdk-root] {
+  max-width: 640px;
+  width: 100%;
+  padding: 8px;
+  background: #eeeee1;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: var(--font-sans);
+  border: 1px solid var(--gray6);
+  box-shadow: var(--cmdk-shadow);
+  transition: transform 100ms ease;
+  outline: none;
+}
+
+.currencyCombobox .dark [cmdk-root] {
+  background: rgba(22, 22, 22, 0.7);
+}
+
+.currencyCombobox [cmdk-input] {
+  font-family: var(--font-sans);
+  border: none;
+  width: 100%;
+  font-size: 12px;
+  padding: 8px 8px 16px 8px;
+  outline: none;
+  background: var(--bg);
+  color: var(--gray12);
+  border-bottom: 1px solid var(--gray6);
+  margin-bottom: 16px;
+  border-radius: 0;
+}
+
+.currencyCombobox [cmdk-input]::placeholder {
+  color: var(--gray9);
+}
+
+.currencyCombobox [cmdk-item] {
+  content-visibility: auto;
+  cursor: pointer;
+  height: 48px;
+  border-radius: 8px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 16px;
+  color: var(--gray11);
+  user-select: none;
+  will-change: background, color;
+  transition: all 150ms ease;
+  transition-property: none;
+}
+
+.currencyCombobox [cmdk-item][data-selected="true"] {
+  background: var(--grayA3);
+  color: var(--gray12);
+}
+
+.currencyCombobox [cmdk-item][data-disabled="true"] {
+  color: var(--gray8);
+  cursor: not-allowed;
+}
+
+.currencyCombobox [cmdk-item]:active {
+  transition-property: background;
+  background: var(--gray4);
+}
+
+.currencyCombobox [cmdk-item] + [cmdk-item] {
+  margin-top: 4px;
+}
+
+.currencyCombobox [cmdk-item] svg {
+  width: 18px;
+  height: 18px;
+}
+
+.currencyCombobox [cmdk-list] {
+  min-height: 150px;
+  max-height: 250px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  transition: 100ms ease;
+  transition-property: height;
+}
+
+.currencyCombobox [cmdk-vercel-shortcuts] {
+  display: flex;
+  margin-left: auto;
+  gap: 8px;
+}
+
+.currencyCombobox [cmdk-vercel-shortcuts] kbd {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  min-width: 20px;
+  padding: 4px;
+  height: 20px;
+  border-radius: 4px;
+  color: var(--gray11);
+  background: var(--gray4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.currencyCombobox [cmdk-separator] {
+  height: 1px;
+  width: 100%;
+  background: var(--gray5);
+  margin: 4px 0;
+}
+
+.currencyCombobox *:not([hidden]) + [cmdk-group] {
+  margin-top: 8px;
+}
+
+.currencyCombobox [cmdk-group-heading] {
+  user-select: none;
+  font-size: 12px;
+  color: var(--gray11);
+  padding: 0 8px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.currencyCombobox [cmdk-empty] {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  white-space: pre-wrap;
+  color: var(--gray11);
+}

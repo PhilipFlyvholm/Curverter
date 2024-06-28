@@ -23,20 +23,26 @@ const res = rawData.reduce((acc: FormattedCurrencies, x: RawCurrency) => {
   if (code === "(none)" || !code) return acc
 
   if (!acc[code]) {
-    const symbols = x.symbol
-      .split("or")
-      .flatMap((x: string) =>
-        x.split(" ").map((x: string) => x.trim().toUpperCase()).filter((x: string) => x.length > 0 && !x.includes("("))
-      )
-      
+    const symbols = x.symbol.split("or").flatMap((x: string) =>
+      x
+        .split(" ")
+        .map((x: string) => x.trim().toUpperCase())
+        .filter((x: string) => x.length > 0 && !x.includes("("))
+    )
+
     const displaySymbol = x.symbol
     //Load flag image png from assets/CurrencyFlags
     const existsImage = fs.existsSync(
-      `../assets/CurrencyFlags/${code.toUpperCase()}.png`
+      `../../assets/CurrencyFlags/${code.toUpperCase()}.png`
     )
     let flag = ""
     if (existsImage) {
-      flag = `data:image/png;base64,${fs.readFileSync(`../assets/CurrencyFlags/${code.toUpperCase()}.png`).toString("base64")}`
+      flag = `data:image/png;base64,${fs.readFileSync(`../../assets/CurrencyFlags/${code.toUpperCase()}.png`).toString("base64")}`
+    } else {
+      if (fs.existsSync(`../../assets/CurrencyFlags/UNKNOWN.png`))
+        flag = `data:image/png;base64,${fs.readFileSync(`../../assets/CurrencyFlags/UNKNOWN.png`).toString("base64")}`
+      else
+        console.error(`Flag for currency ${code} not found`)
     }
     acc[code] = {
       ...x,
