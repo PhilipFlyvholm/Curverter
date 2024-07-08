@@ -1,3 +1,4 @@
+import globalStyleText from "data-text:./styles.css"
 import styleText from "data-text:./styles.module.css"
 import type { PlasmoCSConfig, PlasmoGetStyle } from "plasmo"
 
@@ -10,7 +11,7 @@ export const config: PlasmoCSConfig = {
 export const getStyle: PlasmoGetStyle = () => {
   console.log("getStyle called from root")
   const style = document.createElement("style")
-  style.textContent = styleText
+  style.textContent = globalStyleText + styleText
   return style
 }
 

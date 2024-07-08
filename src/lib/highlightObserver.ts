@@ -32,6 +32,7 @@ const extractCurrencyMatch = (
     }
     const symbols = currencies[key].symbols
     for (let symbol of symbols) {
+      if(symbol === "") continue
       if (text.includes(symbol) || text.includes(symbol + ".")) {
         const currencyKey = key as AcceptedCurrency
         currencyMatches.push({

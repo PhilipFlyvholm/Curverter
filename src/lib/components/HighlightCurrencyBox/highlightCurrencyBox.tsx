@@ -4,7 +4,8 @@ import {
   flip,
   inline,
   offset,
-  shift
+  shift,
+  type ReferenceElement
 } from "@floating-ui/dom"
 import { useEffect, useRef, useState } from "react"
 
@@ -14,6 +15,8 @@ import * as style from "~contents/styles.module.css"
 import CurrencySelector from "~lib/components/CurrencySelector/currencySelector"
 import { type AcceptedCurrency } from "~lib/currencies"
 import { isCurrencyString } from "~lib/highlightObserver"
+
+const DEFAULT_CURRENCY = "DKK" // TODO: Make this configurable
 
 const HighlightCurrencyBox = () => {
   const box = useRef<HTMLDivElement>(null)
@@ -27,8 +30,8 @@ const HighlightCurrencyBox = () => {
   } | null>(null)
   const [floatingUICleanup, setFloatingUICleanup] =
     useState<() => void | null>(null)
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [currencyRates] = useStorage("currencyRates")
-
   function unselect() {
     setConversionState(null)
     if (box.current) box.current.style.display = "none"
@@ -36,19 +39,22 @@ const HighlightCurrencyBox = () => {
   }
 
   function updateFloatingPosition(
-    element: HTMLElement,
-    floatingElement: HTMLElement,
-    { x, y }: { x: number; y: number }
+    element: ReferenceElement,
+    floatingElement: HTMLElement
   ) {
     computePosition(element, floatingElement, {
       placement: "bottom",
-      middleware: [inline({ x, y }), flip(), shift({ padding: 5 }), offset(5)]
+      middleware: [flip(), shift({ padding: 5 }), offset(5)]
     }).then(({ x, y }) => {
       Object.assign(floatingElement.style, {
         left: `${x}px`,
         top: `${y}px`
       })
     })
+  }
+
+  function handleMouseDown(e: MouseEvent) {
+    setMousePosition({ x: e.clientX, y: e.clientY })
   }
 
   async function handleMouseUp(e: MouseEvent) {
@@ -71,12 +77,39 @@ const HighlightCurrencyBox = () => {
       return
     }
 
-    //TODO: Handle case where target and source currencies are the same
+    if (match.currency.key === DEFAULT_CURRENCY) {
+      unselect()
+      return
+    }
 
     const element = currentSelection.anchorNode.parentElement
     if (!element || !box.current) {
       unselect()
       return
+    }
+    let { clientX, clientY } = e
+    let { x, y } = mousePosition
+
+    const virtualHeight = clientY > y ? clientY - y : y - clientY
+    const virtualY = (clientY > y ? y : clientY) + virtualHeight / 2
+    const virtualWidth = clientX > x ? clientX - x : x - clientX
+    const virtualX = clientX > x ? x : clientX
+    const height = parseFloat(
+      window.getComputedStyle(element, null).getPropertyValue("font-size")
+    )
+    const virtualElement = {
+      getBoundingClientRect() {
+        return {
+          width: virtualWidth,
+          height: height,
+          x: virtualX + virtualWidth,
+          y: virtualY,
+          top: virtualY,
+          left: virtualX,
+          right: virtualX + virtualWidth,
+          bottom: virtualY + height
+        }
+      }
     }
 
     const currencyRate = 1 / currencyRates.rates[match.currency.key]
@@ -84,19 +117,15 @@ const HighlightCurrencyBox = () => {
       value: match.value,
       currencyRate,
       fromCurrency: match.currency.key,
-      toCurrency: "DKK",
+      toCurrency: DEFAULT_CURRENCY,
       alternativeCurrencies: match.alternatives,
       element
     })
-    console.log(e.clientX, e.clientY)
 
     box.current.style.display = "block"
     setFloatingUICleanup(
-      autoUpdate(element, box.current, () =>
-        updateFloatingPosition(element, box.current, {
-          x: e.clientX,
-          y: e.clientY
-        })
+      autoUpdate(virtualElement, box.current, () =>
+        updateFloatingPosition(virtualElement, box.current)
       )
     )
   }
@@ -138,13 +167,13 @@ const HighlightCurrencyBox = () => {
   }
 
   useEffect(() => {
-    console.log("Loaded extension");
-    
+    window.addEventListener("mousedown", handleMouseDown)
     window.addEventListener("mouseup", handleMouseUp)
     return () => {
+      window.removeEventListener("mousedown", handleMouseDown)
       window.removeEventListener("mouseup", handleMouseUp)
     }
-  }, [currencyRates])
+  }, [currencyRates, mousePosition])
 
   return (
     <div className={style.highlightBox} ref={box}>
@@ -168,7 +197,7 @@ const HighlightCurrencyBox = () => {
               )}
             </h2>
             <CurrencySelector
-              recommendedCurrencies={["DKK"]}
+              recommendedCurrencies={[DEFAULT_CURRENCY]}
               currency={conversionState.toCurrency}
               onCurrencyChange={handleToCurrencyChange}
             />
