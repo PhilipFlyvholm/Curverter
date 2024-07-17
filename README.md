@@ -1,33 +1,70 @@
-This is a [Plasmo extension](https://docs.plasmo.com/) project bootstrapped with [`plasmo init`](https://www.npmjs.com/package/plasmo).
+<p align="center">
+    <img src="assets/full_logo.png"
+        height="80">
+</p>
+
+## Introduction
+
+**Curverter** is a Chrome extension designed to enhance your browsing experience by instantly converting highlighted currency values. Curverter ensures you have exchange rates without needing to switch tabs or use separate apps.
+
+<p align="center">
+    <img src="assets/screenshot.png"
+        height="250">
+</p>
+
+## Features
+
+- **Instant Conversion**: Highlight any currency value on a webpage to see the converted amount in your preferred currency.
+- **Up-to-Date Exchange Rates**: Uses reliable data sources to provide the most current exchange rates.
+- **User-Friendly Interface**: Simple and intuitive design for ease of use.
+- **Wide Compatibility**: Supports a broad range of currencies and websites.
 
 ## Getting Started
 
-First, run the development server:
+To install and use Curverter, follow these steps:
 
-```bash
-pnpm dev
-# or
-npm run dev
-```
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/PhilipFlyvholm/curverter.git
+   cd curverter
+    ```
+2. **Install Dependencies**:
+   ```bash
+   pnpm install
+    ```
+3. **Run in Development Mode**:
+   ```bash
+   pnpm dev
+    ```
 
-Open your browser and load the appropriate development build. For example, if you are developing for the chrome browser, using manifest v3, use: `build/chrome-mv3-dev`.
+> **_NOTE:_**  See [https://docs.plasmo.com/](https://docs.plasmo.com/) for more infomation
 
-You can start editing the popup by modifying `popup.tsx`. It should auto-update as you make changes. To add an options page, simply add a `options.tsx` file to the root of the project, with a react component default exported. Likewise to add a content page, add a `content.ts` file to the root of the project, importing some module and do some logic, then reload the extension on your browser.
 
-For further guidance, [visit our Documentation](https://docs.plasmo.com/)
+## How to contribute
+We welcome contributions from the community! To contribute, follow these guidelines:
 
-## Making production build
+1. Fork the Repository: Click the 'Fork' button on the GitHub repository page.
+2. Create a Branch: Create a new branch for your feature or bugfix.
+    ```bash
+    git checkout -b feature/your-feature-name
+    ```
+3. Make Changes: Implement your feature or bugfix.
+4. Commit Changes: Commit your changes with a descriptive message.
+    ```bash
+    git commit -m "Add feature: your-feature-name"
+    ```
+5. Push to GitHub: Push your changes to your forked repository.
+    ```bash
+    git push origin feature/your-feature-name
+    ```
+6. Create a Pull Request: Open a pull request on the original repository to merge your changes.
 
-Run the following:
+## Project structure
 
-```bash
-pnpm build
-# or
-npm run build
-```
+- src/: Source code for the extension.
+- public/: Static files and assets.
+- package.json: Project metadata, extension manifest file and dependencies.
 
-This should create a production bundle for your extension, ready to be zipped and published to the stores.
 
-## Submit to the webstores
-
-The easiest way to deploy your Plasmo extension is to use the built-in [bpp](https://bpp.browser.market) GitHub action. Prior to using this action however, make sure to build your extension and upload the first version to the store to establish the basic credentials. Then, simply follow [this setup instruction](https://docs.plasmo.com/framework/workflows/submit) and you should be on your way for automated submission!
+## License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
