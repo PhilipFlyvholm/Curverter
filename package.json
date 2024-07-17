@@ -13,7 +13,7 @@
     "@floating-ui/dom": "^1.6.6",
     "@plasmohq/storage": "^1.10.0",
     "cmdk": "^1.0.0",
-    "plasmo": "0.87.2",
+    "plasmo": "0.88.0",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },

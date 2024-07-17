@@ -1,0 +1,164 @@
+:root {
+  font-size: 14px;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  width: 343px;
+  height: 369px;
+  background-color: #eeeee1;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Lora", serif;
+}
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.5rem;
+}
+h2 {
+  font-size: 1.25rem;
+}
+h3 {
+  font-size: 1.125rem;
+}
+h4 {
+  font-size: 1rem;
+}
+h5 {
+  font-size: 0.875rem;
+}
+h6 {
+  font-size: 0.75rem;
+}
+
+#header {
+  background: #262626;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#header h1 {
+  color: #fff;
+  font-size: 1.5rem;
+  margin: 0 0.5rem;
+}
+
+.currencyInput {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  background: #eeeed3;
+  height: 2.5rem;
+  border-radius: 5px;
+  cursor: text;
+}
+
+.currencyInput .currencyInputField {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin: 0 0.5rem;
+  flex: 1;
+}
+
+.currencyInput .currencyInputField input {
+  height: 100%;
+  font-size: 1rem;
+  width: 100%;
+  border: none;
+  background: none;
+  font-family: "Lora", serif;
+  outline: none;
+}
+
+.currencyInput .currencyInputField small {
+  font-size: 0.5rem;
+  color: #666666;
+}
+
+.currencyInput .currencyInputCurrencyLabel {
+  color: #666666;
+  margin: 0 0.5rem;
+  font-style: italic;
+}
+
+.currencyInputContainer{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background-color: #F6F6E5;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    padding: .7rem 0;
+}
+
+
+section{
+    width: 90%;
+    margin: 1rem auto;
+    background-color: #E5E5CE;
+    padding: .5rem 1rem;
+    border-radius: 15px;
+}
+
+section .section-header{
+    text-align: center;
+}
+
+.flip-currency-button {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: .5rem; 
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+  margin: -.5rem 0;
+  border-radius: 2.5rem;
+  background-color: #232323;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.flip-currency-button:hover{
+  background-color: #333333;
+}
+
+.flip-currency-button svg{
+  width: 100%;
+}
+
+.currencyInputArea{
+  margin: 1rem 0;
+}

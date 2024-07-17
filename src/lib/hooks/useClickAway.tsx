@@ -10,35 +10,55 @@ export function useClickAway(cb: (e: any) => void) {
 
   React.useEffect(() => {
     const shadowRootContainer = document.querySelector("plasmo-csui")
-    const shadowRoot = shadowRootContainer.shadowRoot
+    console.log(shadowRootContainer);
+    
+    if (shadowRootContainer !== null) {
+      const shadowRoot = shadowRootContainer.shadowRoot
 
-    const shadowRootHandler = (e: { target: any }) => {
-      const element = ref.current
+      const shadowRootHandler = (e: { target: any }) => {
+        const element = ref.current
 
-      if (element && !element.contains(e.target)) {
+        if (element && !element.contains(e.target)) {
+          refCb.current(e)
+        }
+      }
+
+      const documentHandler = (e: { target: any }) => {
+        if (e.target == shadowRootContainer) {
+          return
+        }
+
         refCb.current(e)
       }
-    }
 
-    const documentHandler = (e: { target: any }) => {
-      if (e.target == shadowRootContainer) {
-        return
+      shadowRoot.addEventListener("mousedown", shadowRootHandler)
+      shadowRoot.addEventListener("touchstart", shadowRootHandler)
+
+      document.addEventListener("mousedown", documentHandler)
+      document.addEventListener("touchstart", documentHandler)
+
+      return () => {
+        shadowRoot.removeEventListener("mousedown", shadowRootHandler)
+        shadowRoot.removeEventListener("touchstart", shadowRootHandler)
+        document.removeEventListener("mousedown", documentHandler)
+        document.removeEventListener("touchstart", documentHandler)
+      }
+    }else{
+      const handler = (e: { target: any }) => {
+        const element = ref.current
+
+        if (element && !element.contains(e.target)) {
+          refCb.current(e)
+        }
       }
 
-      refCb.current(e)
-    }
+      document.addEventListener("mousedown", handler)
+      document.addEventListener("touchstart", handler)
 
-    shadowRoot.addEventListener("mousedown", shadowRootHandler)
-    shadowRoot.addEventListener("touchstart", shadowRootHandler)
-
-    document.addEventListener("mousedown", documentHandler)
-    document.addEventListener("touchstart", documentHandler)
-
-    return () => {
-      shadowRoot.removeEventListener("mousedown", shadowRootHandler)
-      shadowRoot.removeEventListener("touchstart", shadowRootHandler)
-      document.removeEventListener("mousedown", documentHandler)
-      document.removeEventListener("touchstart", documentHandler)
+      return () => {
+        document.removeEventListener("mousedown", handler)
+        document.removeEventListener("touchstart", handler)
+      }
     }
   }, [])
 

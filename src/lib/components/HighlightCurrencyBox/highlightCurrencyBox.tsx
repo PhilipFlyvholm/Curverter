@@ -71,22 +71,18 @@ const HighlightCurrencyBox = () => {
     }
 
     const selectedText = currentSelection.toString()
-    const [isMatch, match] = isCurrencyString(selectedText)
-    if (!isMatch) {
-      unselect()
-      return
-    }
-
-    if (match.currency.key === DEFAULT_CURRENCY) {
-      unselect()
-      return
-    }
-
     const element = currentSelection.anchorNode.parentElement
-    if (!element || !box.current) {
+    const [isMatch, match] = isCurrencyString(selectedText)
+    if (
+      !isMatch ||
+      match.currency.key === DEFAULT_CURRENCY ||
+      !element ||
+      !box.current
+    ) {
       unselect()
       return
     }
+
     let { clientX, clientY } = e
     let { x, y } = mousePosition
 

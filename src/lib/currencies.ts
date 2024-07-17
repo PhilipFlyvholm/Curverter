@@ -6,3 +6,4 @@ export type CurrencyRates = {
   nextUpdateUnix: number
   rates: Record<AcceptedCurrency, number>
 }
+export const popularCurrencies: AcceptedCurrency[] = ["USD", "EUR", "GBP", "JPY", "CNY"]
