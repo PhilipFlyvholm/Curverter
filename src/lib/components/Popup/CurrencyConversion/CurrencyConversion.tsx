@@ -120,8 +120,8 @@ function CurrencyConversion() {
   useEffect(() => {
     if (!currencyRates) return
     setConversionState({
-      from: { currency: "DKK", value: 100, isCalculated: false },
-      to: { currency: "EUR", value: 100 * currencyRates.rates["EUR"], isCalculated: true },
+      from: { currency: "DKK", value: 1, isCalculated: false },
+      to: { currency: "EUR", value: currencyRates.rates["EUR"], isCalculated: true },
       rate: currencyRates.rates["EUR"]
     })
   }, [currencyRates])

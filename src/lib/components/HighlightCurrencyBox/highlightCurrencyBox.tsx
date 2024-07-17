@@ -15,6 +15,8 @@ import * as style from "~contents/styles.module.css"
 import CurrencySelector from "~lib/components/CurrencySelector/currencySelector"
 import { type AcceptedCurrency } from "~lib/currencies"
 import { isCurrencyString } from "~lib/highlightObserver"
+import { formatCurrency } from "~lib/utils/FormatUtil"
+import type { ConversionHistoryList } from "~lib/utils/StorageTypes"
 
 const DEFAULT_CURRENCY = "DKK" // TODO: Make this configurable
 
@@ -32,6 +34,8 @@ const HighlightCurrencyBox = () => {
     useState<() => void | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [currencyRates] = useStorage("currencyRates")
+  const [_conversionHistory, setConversionHistory] =
+    useStorage<ConversionHistoryList>("conversionHistory", [])
   function unselect() {
     setConversionState(null)
     if (box.current) box.current.style.display = "none"
@@ -124,14 +128,40 @@ const HighlightCurrencyBox = () => {
         updateFloatingPosition(virtualElement, box.current)
       )
     )
+
+    setConversionHistory((history) => {
+      if (history === null) history = []
+      history.push({
+        timestamp: new Date(),
+        from: { currency: match.currency.key, value: match.value },
+        to: { currency: DEFAULT_CURRENCY, value: match.value * currencyRate },
+        meta: {
+          url: window.location.href,
+          title: document.title,
+          favicon: getFavicon()
+        }
+      })
+      return history
+    })
   }
 
-  function formatCurrency(num: number, currency: AcceptedCurrency) {
-    const formatter = new Intl.NumberFormat(undefined, {
-      style: "currency",
-      currency
-    })
-    return formatter.format(num)
+  function getFavicon() {
+    let favicon = document.querySelector("link[rel='icon']") as HTMLLinkElement
+    if (favicon) {
+      const href = favicon.href
+      if (href.startsWith("http")) {
+        return href
+      }
+      if (href.startsWith("//")) {
+        return window.location.protocol + href
+      }
+      if (href.startsWith("/")) {
+        return window.location.origin + href
+      }
+
+      return window.location.origin + "/" + href
+    }
+    return window.location.origin + "/favicon.ico"
   }
 
   function handleFromCurrencyChange(currency: AcceptedCurrency) {
